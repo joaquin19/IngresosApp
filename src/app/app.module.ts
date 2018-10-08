@@ -11,6 +11,12 @@ import { DetalleComponent } from './ingreso-egreso/detalle/detalle.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { FormsModule } from '@angular/forms';
+
+// firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // routing
 import { AppRoutingModuel } from './app-routing.module';
@@ -30,7 +36,11 @@ import { AppRoutingModuel } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModuel
+    AppRoutingModuel,
+    FormsModule,
+    AngularFireModule,
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
