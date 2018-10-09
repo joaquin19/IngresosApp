@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
+// colocando alerta dinamica
+import Swal from 'sweetalert2';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,13 +18,12 @@ export class AuthService {
     this.angularFireAuth.auth
     .createUserWithEmailAndPassword(email, password)
     .then( resp => {
-      console.log(resp);
 
       // es la ruta de cuando se crea la contraseña ingresa al dashboard
       this.router.navigate(['/']);
     })
     .catch( error => {
-      console.error(error);
+      Swal('Error al crear usuario', error.message, 'error');
     });
   }
 
@@ -29,12 +31,18 @@ export class AuthService {
     this.angularFireAuth.auth
     .signInWithEmailAndPassword(email, password)
     .then(resp => {
-      console.log(resp);
 
+      // es la ruta al logear con el correo corecto
       this.router.navigate(['/']);
     })
     .catch(error => {
-      console.error(error);
+      Swal('Error en el login', error.message, 'error');
     });
+  }
+
+  logout() {
+
+    this.router.navigate(['/login']);
+    this.angularFireAuth.auth.signOut();
   }
 }
