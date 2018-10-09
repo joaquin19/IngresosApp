@@ -13,10 +13,11 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 
-// firebase
+// firebase imports
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
 
 // routing
 import { AppRoutingModuel } from './app-routing.module';
@@ -38,7 +39,8 @@ import { AppRoutingModuel } from './app-routing.module';
     BrowserModule,
     AppRoutingModuel,
     FormsModule,
-    AngularFireModule,
+    // Son los modulos para activar la base de datos de firebase
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule
   ],

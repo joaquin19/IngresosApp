@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
+    // aqui se mandan la rustas hijas
     path: '',
     component: DashboardComponent,
     children: dashboardRoutes
