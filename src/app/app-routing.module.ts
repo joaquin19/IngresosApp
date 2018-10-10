@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { dashboardRoutes } from './dashboard/dashboard.routes';
+import { AuthProtectService } from './auth/auth-protect.service';
 
 const routes: Routes = [
 
@@ -13,7 +14,9 @@ const routes: Routes = [
     // aqui se mandan la rustas hijas
     path: '',
     component: DashboardComponent,
-    children: dashboardRoutes
+    children: dashboardRoutes,
+    // activamos la ruta del protector de autentificado
+    canActivate: [ AuthProtectService ]
   },
   { path: '**', redirectTo: '' }
 ];

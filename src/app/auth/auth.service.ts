@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
+import * as firebase from 'firebase';
+import { map } from 'rxjs/operators';
+
 // colocando alerta dinamica
 import Swal from 'sweetalert2';
 
@@ -12,6 +15,14 @@ export class AuthService {
 
   constructor( private angularFireAuth: AngularFireAuth,
                private router: Router ) { }
+
+
+  // verifica la authenticacion del usuario que logea o se registra
+  initAuthListener() {
+    this.angularFireAuth.authState.subscribe( (fbUser: firebase.User) => {
+      console.log(fbUser);
+    });
+  }
 
   createUser( name: string, email: string, password: string) {
 
@@ -44,5 +55,16 @@ export class AuthService {
 
     this.router.navigate(['/login']);
     this.angularFireAuth.auth.signOut();
+  }
+
+  isAuth() {
+    return this.angularFireAuth.authState.pipe(
+      map( fbUser => {
+        if ( fbUser === null) {
+          this.router.navigate(['/login']);
+        }
+        return fbUser != null;
+      })
+    );
   }
 }
