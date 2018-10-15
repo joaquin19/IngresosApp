@@ -12,11 +12,15 @@ import { User } from './user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { ActivatedLoadingAction, DesactivatedLoadingAction } from '../shared/ui.accions';
+import { SetUserAction } from './auth.accions';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private userSubscription: Subscription = new Subscription();
 
   constructor( private angularFireAuth: AngularFireAuth,
                private router: Router,
@@ -27,6 +31,17 @@ export class AuthService {
   // verifica la authenticacion del usuario que logea o se registra
   initAuthListener() {
     this.angularFireAuth.authState.subscribe( (fbUser: firebase.User) => {
+
+      if (fbUser) {
+        this.userSubscription = this.afDB.doc(`${ fbUser.uid }/usuario`).valueChanges()
+        .subscribe((userObj: any) => {
+
+          const newUser = new User(userObj);
+          this.store.dispatch( new SetUserAction(newUser));
+        });
+      } else {
+        this.userSubscription.unsubscribe();
+      }
     });
   }
 
