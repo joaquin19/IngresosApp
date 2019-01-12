@@ -12,7 +12,7 @@ import { User } from './user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { ActivatedLoadingAction, DesactivatedLoadingAction } from '../shared/ui.accions';
-import { SetUserAction } from './auth.accions';
+import { SetUserAction, UnsetUserAction } from './auth.accions';
 import { Subscription } from 'rxjs';
 
 @Injectable({
@@ -99,6 +99,7 @@ export class AuthService {
 
     this.router.navigate(['/login']);
     this.angularFireAuth.auth.signOut();
+    this.store.dispatch(new UnsetUserAction());
   }
 
   isAuth() {

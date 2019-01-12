@@ -38,17 +38,15 @@
               </div>
 
               <hr>
-              <button [disabled]="form.invalid" type="submit" class="btn btn-success mr-2">
+              <button *ngIf="!load" [disabled]="form.invalid" type="submit" class="btn btn-success mr-2">
                 <i class="fa fa-save"></i>
                 Agregar
               </button>
 
-              <!--
-                <button disabled class="btn btn-success mr-2">
+                <button *ngIf="load" disabled class="btn btn-success mr-2">
                   <i class="fa fa-spin fa-sync"></i>
                   Espere por favor...
                 </button>
-              -->
 
               <button type="reset" class="btn btn-light">Cancelar</button>
 
