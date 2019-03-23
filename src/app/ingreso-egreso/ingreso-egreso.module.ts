@@ -1,3 +1,4 @@
+import { StoreModule } from '@ngrx/store';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -9,6 +10,7 @@ import { ChartsModule } from 'ng2-charts';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardRoutingModule } from '../dashboard/dashboard-routing.module';
+import { IngresoEgresoReducer } from './ingreso-egreso.reducer';
 
 @NgModule({
   imports: [
@@ -17,6 +19,7 @@ import { DashboardRoutingModule } from '../dashboard/dashboard-routing.module';
     ReactiveFormsModule,
     SharedModule,
     DashboardRoutingModule,
+    StoreModule.forFeature('ingresoEgreso', IngresoEgresoReducer)
   ],
   declarations: [
     DashboardComponent,
